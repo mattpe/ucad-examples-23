@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import {getItems, getItemsById, postItem} from './items.js';
+import {getUsers} from './user.js';
+import {getMedia} from './media.js';
 
 const hostname = '127.0.0.1';
 const app = express();
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// render pug a file (home.pug) example
 app.get('/', (req, res) => {
   const values = {title: "Dummy REST API docs", message: "TODO: docs"};
   res.render('home', values);
@@ -52,6 +54,12 @@ app.put('/api/items');
 app.post('/api/items', postItem);
 // remove existing item
 app.delete('/api/items');
+
+// media endpoints
+app.get('/api/media', getMedia);
+
+// user endpoints
+app.get('/api/user', getUsers);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

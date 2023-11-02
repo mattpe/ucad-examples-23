@@ -17,3 +17,15 @@ content-type: application/json
 POST http://localhost:3000/api/items
 
 {"jotain": "jotan"}
+
+### GET /kukkuu
+GET http://localhost:3000/kukkuu
+
+### GET /something-else
+GET http://localhost:3000/morjes
+
+### GET all users
+GET http://localhost:3000/api/user
+
+### GET all media items
+GET http://localhost:3000/api/media
