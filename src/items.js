@@ -6,7 +6,8 @@ const items = [
 ];
 
 /**
- * Gets all items
+ * Get all items request handler
+ * Amount of  objects in response can be limited by using 'limit' query param
  * 
  * @param {object} req - http request 
  * @param {object} res - http response
