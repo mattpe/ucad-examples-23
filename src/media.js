@@ -56,4 +56,35 @@ const getMedia = (req, res) => {
   res.json(mediaItems);
 };
 
-export {getMedia};
+const getMediaById = (req, res) => {
+  const media = mediaItems.find((item) => item.media_id == req.params.id);
+  if (media) {
+    res.json(media);
+  } else {
+    res.sendStatus(404);
+  }
+};
+
+const postMedia = (req, res) => {
+  const {filename, title, description, user_id} = req.body;
+  const newId = mediaItems[0].media_id + 1;
+  if (filename && title && description && user_id) {
+    mediaItems.unshift({media_id: newId, filename, title, description, user_id});
+    res.status(201);
+    res.json({message: 'New media item added.'})
+  } else {
+    res.sendStatus(400);  
+  }
+};
+
+const putMedia = (req, res) => {
+  // placeholder
+  res.sendStatus(200);
+};
+
+const deleteMedia = (req, res) => {
+  // placeholder
+  res.sendStatus(200);
+};
+
+export {getMedia, getMediaById, postMedia, putMedia, deleteMedia};

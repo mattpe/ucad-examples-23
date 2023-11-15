@@ -2,8 +2,8 @@ import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import {getItems, getItemsById, postItem} from './items.js';
-import {getUsers} from './user.js';
-import {getMedia} from './media.js';
+import {deleteUser, getUserById, getUsers, postUser, putUser} from './user.js';
+import {deleteMedia, getMedia, getMediaById, postMedia, putMedia} from './media.js';
 
 const hostname = '127.0.0.1';
 const app = express();
@@ -19,7 +19,7 @@ app.use('/docs', express.static(path.join(__dirname, '../docs')));
 
 // simple custom middleware for logging/debugging all requests
 app.use((req, res, next) => {
-  console.log('Time:', Date.now(), req.method, req.url);
+  console.log('Time:', new Date().toISOString(), req.method, req.url);
   next();
 });
 
@@ -57,9 +57,18 @@ app.delete('/api/items');
 
 // media endpoints
 app.get('/api/media', getMedia);
+app.get('/api/media/:id', getMediaById);
+app.post('/api/media', postMedia);
+app.put('/api/media/:id', putMedia);
+app.delete('/api/media/:id', deleteMedia);
 
 // user endpoints
-app.get('/api/user', getUsers);
+app.get('/api/users', getUsers);
+app.get('/api/users/:id', getUserById);
+app.post('/api/users', postUser);
+app.put('/api/users/:id', putUser);
+app.delete('/api/users/:id', deleteUser);
+
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
