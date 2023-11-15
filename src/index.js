@@ -1,8 +1,8 @@
 import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import {deleteUser, getUserById, getUsers, postUser, putUser} from './controllers/user-controller.mjs';
 import mediaRouter from './routes/media-router.mjs';
+import userRouter from './routes/user-router.mjs';
 
 const hostname = '127.0.0.1';
 const app = express();
@@ -46,12 +46,7 @@ app.get('/:message', (req, res) => {
 app.use('/api/media', mediaRouter);
 
 // user endpoints
-app.get('/api/users', getUsers);
-app.get('/api/users/:id', getUserById);
-app.post('/api/users', postUser);
-app.put('/api/users/:id', putUser);
-app.delete('/api/users/:id', deleteUser);
-
+app.use('/api/users', userRouter);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
