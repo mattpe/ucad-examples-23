@@ -3,6 +3,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import mediaRouter from './routes/media-router.mjs';
 import userRouter from './routes/user-router.mjs';
+import authRouter from './routes/auth-router.mjs';
 import {logger} from './middlewares/middlewares.mjs';
 
 const hostname = '127.0.0.1';
@@ -29,9 +30,10 @@ app.get('/', (req, res) => {
   res.render('home', values);
 });
 
+// auth endpoints
+app.use('/api/auth', authRouter);
 // media endpoints
 app.use('/api/media', mediaRouter);
-
 // user endpoints
 app.use('/api/users', userRouter);
 
