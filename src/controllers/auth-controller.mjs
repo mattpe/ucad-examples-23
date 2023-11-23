@@ -5,6 +5,9 @@ import {login} from "../models/user-model.mjs";
 const postLogin = async (req, res) => {
   // TODO: use model to query sql for user info (username/pw)
   const user = await login(req.body);
+  if (user.error) {
+    return next(new Error(result.error));
+  }
   console.log('postLogin', user);
   try {
     const token = jwt.sign(user, process.env.JWT_SECRET);
