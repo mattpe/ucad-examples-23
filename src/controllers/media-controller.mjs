@@ -21,25 +21,33 @@ const getMediaById = async (req, res) => {
   }
 };
 
-const postMedia = async (req, res) => {
+const postMedia = async (req, res, next) => {
   //console.log('uploaded file', req.file);
   //console.log('uploaded form data', req.body);
-  if (!req.file) {
-    return res.status(400).json({message: 'file missing or invalid'});
-  }
+  // Error handling moved to fileFilter
+  // if (!req.file) {
+  //   const error = new Error('file missing or invalid');
+  //   error.status = 400;
+  //   return next(error);
+  // }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     // details about errors:
-    console.log(errors.array())
-    return res.status(400).json({message: 'invalid input fields'});
+    console.log('validation errors', errors.array());
+    const error = new Error('invalid input fields');
+    error.status = 400;
+    return next(error);
   }
   const {title, description} = req.body;
   const {filename, mimetype, size} = req.file;
   // req.user is added by authenticateToken middleware
   const user_id = req.user.user_id;
-  // TODO: add error handling when database error occurs
   const newMedia = {title, description, user_id, filename, mimetype, size};
   const result = await addMedia(newMedia);
+  // error handling when database error occurs
+  if (result.error) {
+    return next(new Error(result.error));
+  }
   res.status(201);
   res.json({message: 'New media item added.', ...result});
 };
