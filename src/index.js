@@ -21,8 +21,13 @@ app.use('/docs', express.static(path.join(__dirname, '../docs')));
 // Serve uploaded mediafiles url: /media/{file}
 app.use('/media', express.static(path.join(__dirname, '../uploads')));
 
+// Serve uploaded mediafiles url: /media/{file}
+app.use('/forms', express.static(path.join(__dirname, '../test-forms')));
+
 // simple custom middleware for logging/debugging all requests
-app.use(logger);
+if (process.env.NODE_ENV === 'development') {
+  app.use(logger);
+}
 
 // render pug a file (home.pug) example
 app.get('/', (req, res) => {
