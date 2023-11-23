@@ -1,16 +1,26 @@
-import users from '../mock-data/users.json' assert {type: 'json'};
+import {validationResult} from "express-validator";
+import {addUser} from "../models/user-model.mjs";
 
-const getUsers = (req, res) => {
-  res.json(users);
+const postUser = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // details about errors:
+      console.log(errors.array())
+      return res.status(400).json({message: 'invalid input fields'});
+    }
+    const newUserId = await addUser(req.body);
+    res.status(201).json({message: 'user added', user_id: newUserId});
 };
+
 
 // Following functions are just stubs at the moment
-const getUserById = (req, res) => {
-    res.json({message: 'getUserById'});
+
+const getUsers = (req, res) => {
+    res.json({users: 'get'});
 };
 
-const postUser = (req, res) => {
-    res.json({message: 'postUser'});
+const getUserById = (req, res) => {
+    res.json({message: 'getUserById'});
 };
 
 const putUser = (req, res) => {
