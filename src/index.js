@@ -25,7 +25,7 @@ app.use('/media', express.static(path.join(__dirname, '../uploads')));
 app.use('/forms', express.static(path.join(__dirname, '../test-forms')));
 
 // simple custom middleware for logging/debugging all requests
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   app.use(logger);
 }
 
