@@ -3,7 +3,7 @@
 POST http://localhost:3000/api/auth/login
 content-type: application/json
 
-{"username": "JohnDoe", "password": "to-be-hashed-pw1"}
+{"username": "uusi1", "password": "uusiyksi"}
 
 ### GET my user info
 GET http://localhost:3000/api/auth/me
@@ -28,7 +28,7 @@ GET http://localhost:3000/api/media/3
 ### Get media by id FAIL
 GET http://localhost:3000/api/media/959099
 
-### Post media 
+### Post media
 POST http://localhost:3000/api/media
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkpvaG5Eb2UiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJ1c2VyX2xldmVsX2lkIjoyLCJpYXQiOjE3MDA2NDQ2MDB9.cN_OM_OQGBN3ldQP0fWhMJVl3Fvm7_rmVz481w2rTr4
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -103,9 +103,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "sfdsfadsf",
-  "password": "nt",
-  "email": "nexuuss@imaili"
+  "username": "uusi1",
+  "password": "uusiyksi",
+  "email": "uusi1@example.com"
 }
 
 ### Post users FAIL
